@@ -1,0 +1,11 @@
+.container{
+    margin-top: 5px;
+    background-color: #FBF8F1;
+}
+.list-title{
+    background-color: #F7ECDE;
+    color: #839AA8;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: x-large;
+}
