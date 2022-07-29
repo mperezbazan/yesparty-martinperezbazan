@@ -9,7 +9,7 @@ const Navbar = () => {
     <AppBar position="static" >
          <Box  className='appbar' sx={{ flexGrow:1 }}>
           
-            <Avatar alt="YES Party" src="/assets/images/logo.png" sx={{ m: 2, width: 40, height: 40 }}/>
+            <Avatar alt="YES Party" src="/images/logo.png" sx={{ m: 2, width: 40, height: 40 }}/>
 
             <Box sx={{ flexGrow:1 }}>
               <Button sx={{ my: 2, color: 'white' }}>
