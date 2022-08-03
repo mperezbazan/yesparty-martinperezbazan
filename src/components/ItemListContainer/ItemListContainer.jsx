@@ -8,7 +8,6 @@ import products from '../../data/products.mock.json'
 const ItemListContainer = ({greeting}) => {
 const [listProducts,setListProducts]=useState([])
 const [loading, setLoading] = useState(false);
-
 const getProducts = new Promise ((resolve, reject)=>{
   
   setTimeout( () => {
@@ -43,10 +42,11 @@ useEffect(() => {
                   <CircularProgress />
                 </Box>
               )}
-            
             <Box sx={{ display:"flex", flexDirection:"row" }}>
-                <ItemList items={listProducts}/>
+              <ItemList items={listProducts}/>
             </Box>
+           
+            
             
 
     </div>
