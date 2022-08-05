@@ -11,10 +11,10 @@ const Item = ({item}) => {
             <CardHeader
                 title={item.title}
             />
-            <CardMedia component="img" height='400' title={item.title} image={`./images/${item.pictureUrl}`} />
+            <CardMedia component="img" height='400' title={item.title} image={`/images/${item.pictureUrl}`} />
             <CardContent>
                 <Typography align="center" variant="h6" color="initial">$ {item.price} </Typography>
-                <ItemCount stock={item.stock} initial={1} />
+                
             </CardContent>
         </Card>
     </div>

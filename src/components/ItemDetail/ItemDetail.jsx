@@ -1,11 +1,10 @@
 import React from 'react'
 import {Typography, CardMedia, Box, Skeleton} from '@mui/material'
 import './ItemDetail.css'
+import ItemCount from '../ItemCount/ItemCount'
 
 
 const ItemDetail = ({item, loading}) => {
-  console.log({item});
-  console.log("LOADING: ",{loading})
   const { title,description, price, stock, pictureUrl} = item;
   return (
     <div>
@@ -29,7 +28,7 @@ const ItemDetail = ({item, loading}) => {
         ) : (
           <CardMedia
             component="img"
-            image={`./images/${pictureUrl}`}
+            image={`../images/${pictureUrl}`}
           />
         )}
          
@@ -56,13 +55,15 @@ const ItemDetail = ({item, loading}) => {
                 <Typography variant="body1" color="initial">{description}</Typography>
                 <Typography variant="h5" color="initial">$ {price}</Typography>
                 <Typography variant="body2" color="initial">Cantidad en stock: {stock}</Typography>
+                <ItemCount stock={stock} initial={1} />
               </>
             )
           }
           
 
-        </Box>  
+        </Box> 
       </Box>
+      
       
       
       

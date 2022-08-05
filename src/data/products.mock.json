@@ -2,6 +2,7 @@
     "id":1,
     "title":"Piñata Unicornio",
     "description":"Piñata de 60x50 con motivo de Unicornio",
+    "category":"piñatas",
     "price":500,
     "stock":10,
     "pictureUrl":"image1.jpg"
@@ -10,6 +11,7 @@
     "id":2,
     "title":"Bolsita Golosinera",
     "description":"Bolsitas de Unicornio contenedoras de golosinas",
+    "category":"sorpresitas",
     "price":50,
     "stock":20,
     "pictureUrl":"image2.jpg"
@@ -18,6 +20,7 @@
     "id":3,
     "title":"Centro de Mesa Unicornio",
     "description":"Centro de mesa con motivo de Unicornio de 30 cm de alto",
+    "category":"decoracion",
     "price":650,
     "stock":3,
     "pictureUrl":"image3.jpg"
@@ -26,6 +29,7 @@
     "id":4,
     "title":"Guirnalda Unicornio",
     "description":"Guirnaldas color pastel con motivo de Unicornio",
+    "category":"decoracion",
     "price":250,
     "stock":3,
     "pictureUrl":"image4.jpg"
