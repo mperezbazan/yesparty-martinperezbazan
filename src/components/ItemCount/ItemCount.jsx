@@ -2,7 +2,7 @@ import { Box, Button, IconButton, Snackbar, Typography } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import React, {useState, useEffect} from 'react'
 
-const ItemCount = ({stock, initial}) => {
+const ItemCount = ({stock, initial, onAdd}) => {
     const [count, setCount]=useState(initial);
     const [disabledMinus, setDisabledMinus]=useState(true)
     const [disabledAdd, setDisabledAdd]=useState(false)
@@ -50,9 +50,6 @@ const ItemCount = ({stock, initial}) => {
         </>
     )
 
-    const onAdd=()=>{
-        setOpenSnackbar(true)
-    }
   return (
     <>
         <Snackbar open={openSnackbar} message={"Cantidad de items agregados: " + count} action={action} anchorOrigin={{vertical: "top",horizontal:"center"}}/>
@@ -63,7 +60,7 @@ const ItemCount = ({stock, initial}) => {
                 <Typography sx={{m:2}} size="small" align ="center">{count}</Typography>
                 <Button sx={{m:2}} disabled={disabledAdd} size="small" variant='outlined' onClick={handleClickAdd}>+</Button>
             </Box>
-            <Button variant='outlined' size="small" disabled={disabledAddCart} onClick={onAdd}>
+            <Button variant='outlined' size="small" disabled={disabledAddCart} onClick={()=> onAdd(count)}>
                 Agregar al carrito
             </Button>
         </Box>

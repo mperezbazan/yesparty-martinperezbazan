@@ -1,11 +1,14 @@
-import React from 'react'
-import {Typography, CardMedia, Box, Skeleton} from '@mui/material'
+import React, { useState } from 'react'
+import {Typography, CardMedia, Box, Skeleton, Button} from '@mui/material'
 import './ItemDetail.css'
 import ItemCount from '../ItemCount/ItemCount'
+import {Link} from 'react-router-dom'
 
 
 const ItemDetail = ({item, loading}) => {
   const { title,description, price, stock, pictureUrl} = item;
+  const [qty, setQty] = useState(0);
+
   return (
     <div>
       <Box sx={{ 
@@ -24,9 +27,10 @@ const ItemDetail = ({item, loading}) => {
          }}>
 
         {loading ? (
-          <Skeleton sx={{  minHeight:400 }} animation="wave" variant="rectangular" />
+          <Skeleton sx={{  height:400 }} animation="wave" variant="rectangular" />
         ) : (
           <CardMedia
+            sx={{  height:400 }}
             component="img"
             image={`../images/${pictureUrl}`}
           />
@@ -55,7 +59,17 @@ const ItemDetail = ({item, loading}) => {
                 <Typography variant="body1" color="initial">{description}</Typography>
                 <Typography variant="h5" color="initial">$ {price}</Typography>
                 <Typography variant="body2" color="initial">Cantidad en stock: {stock}</Typography>
-                <ItemCount stock={stock} initial={1} />
+                {qty>0 ? 
+                  (
+                  <Link to="/cart">
+                    <Button variant='contained' size="small" color='info' sx ={{ mt:5, align:"center" }}>
+                      Terminar Compra
+                    </Button>
+                  </Link>
+                  )
+                  :
+                  (<ItemCount stock={stock} initial={1} onAdd={setQty}/>)
+                }
               </>
             )
           }
