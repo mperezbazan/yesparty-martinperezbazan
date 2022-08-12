@@ -12,13 +12,12 @@ const ItemDetailContainer = () => {
   const {id} = useParams();
 
   const getItem = new Promise ((resolve, reject)=>{
-          setTimeout( () => {
             resolve (products.find( (product) => {
               if(product.id == id){
                 return product
               }
             }))
-          },2000)
+         
         })
     
     useEffect(()=>{

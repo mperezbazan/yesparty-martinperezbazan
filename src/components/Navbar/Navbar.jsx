@@ -51,7 +51,7 @@ const Navbar = () => {
               >
                 {categories.map((category) => {
 
-                  return <Link to={`/category/${category.slug}`}><MenuItem  className="menu-item" onClick={handleClose} key={category.id}>{category.title}</MenuItem></Link>
+                  return <Link to={`/category/${category.slug}`} key={category.id}><MenuItem  className="menu-item" onClick={handleClose} key={category.id}>{category.title}</MenuItem></Link>
 
                 })}
                 

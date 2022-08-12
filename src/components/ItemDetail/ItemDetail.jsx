@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {Typography, CardMedia, Box, Skeleton, Button} from '@mui/material'
 import './ItemDetail.css'
 import ItemCount from '../ItemCount/ItemCount'
 import {Link} from 'react-router-dom'
+import { CartContext } from '../../context/CartContext'
 
 
 const ItemDetail = ({item, loading}) => {
   const { title,description, price, stock, pictureUrl} = item;
+  const {addToCart} = useContext(CartContext)
   const [qty, setQty] = useState(0);
 
+  const addProductToCart = (quantity) => {
+    addToCart({...item,quantity})
+  }
+  
   return (
     <div>
       <Box sx={{ 
@@ -68,7 +74,7 @@ const ItemDetail = ({item, loading}) => {
                   </Link>
                   )
                   :
-                  (<ItemCount stock={stock} initial={1} onAdd={setQty}/>)
+                  (<ItemCount stock={stock} initial={1} onAdd={addProductToCart}/>)
                 }
               </>
             )
