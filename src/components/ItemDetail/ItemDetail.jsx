@@ -13,6 +13,7 @@ const ItemDetail = ({item, loading}) => {
 
   const addProductToCart = (quantity) => {
     addToCart({...item,quantity})
+    setQty(quantity)
   }
   
   return (
