@@ -2,8 +2,9 @@ import { Typography, Box, CircularProgress } from '@mui/material'
 import React, {useEffect, useState} from 'react'
 import ItemList from '../ItemList/ItemList.jsx'
 import './ItemListContainer.css'
-import products from '../../data/products.mock.json'
 import {useParams} from 'react-router-dom'
+import {collection, getDocs, query, where} from 'firebase/firestore'
+import db from '../../firebaseConfig'
 
 
 const ItemListContainer = ({greeting}) => {
@@ -11,31 +12,30 @@ const ItemListContainer = ({greeting}) => {
 
 const [listProducts,setListProducts]=useState([])
 const [loading, setLoading] = useState(false);
-//const [categoryFiltered, setCategoryFiltered]= useState(null);
 const {category} =useParams()
 
-const getProducts = new Promise ((resolve, reject)=>{
-  
-  setTimeout( () => {
-    const productsFiltered = category ? products.filter(product => product.category === category) : products
-    resolve(productsFiltered)
-  },2000)
-})
-
+const getProducts = async ()=>{
+  const productCollection = category ? query(
+    collection(db, 'items'),
+    where("category","==",category)
+  ) 
+  :
+  collection(db, 'items')
+ 
+  const productSnapshot= await getDocs(productCollection)
+  const productList = productSnapshot.docs.map( (doc) => {
+    return {id:doc.id, ...doc.data()}
+  })
+  return productList;
+}
 
 useEffect(()=>{
-
   setLoading(true)
-    getProducts
-      .then((res)=>{
-        setListProducts(res)
-      })
-      .catch((error)=>{
-        console.log("Error en consulta de productos")
-      })
-      .finally(()=>{
-        setLoading(false)
-      })
+  getProducts()
+  .then((res)=>{
+    setListProducts(res)
+  });
+  setLoading(false)
 },[category])
 
 
@@ -43,7 +43,7 @@ useEffect(()=>{
     <div className='container'>
         
             <Typography variant="h5" className="list-title">
-                {greeting}
+                {category ? category.toUpperCase() : greeting  }
             </Typography>
            
               {loading && (
@@ -52,7 +52,11 @@ useEffect(()=>{
                 </Box>
               )}
             <Box sx={{ display:"flex", flexDirection:"row" }}>
-              <ItemList items={listProducts}/>
+              {
+                listProducts.length>0 ? <ItemList items={listProducts}/>
+                : <Typography variant='h5' sx={{ height:'100vh', color:'#839AA8', m:5  }}>No existen productos para la categoría seleccionada</Typography>
+              }
+              
             </Box>
            
             

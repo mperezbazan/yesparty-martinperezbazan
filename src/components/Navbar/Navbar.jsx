@@ -1,13 +1,17 @@
-import React, {useState} from 'react'
-import { AppBar, Avatar, Box, Button, Menu, MenuItem } from '@mui/material'
+import React, {useState, useEffect} from 'react'
+import { AppBar, Avatar, Box, Button, makeStyles, Menu, MenuItem } from '@mui/material'
 import './Navbar.css'
 import CartWidget from '../CartWidget/CartWidget'
 import { Link } from 'react-router-dom'
-import categories from '../../data/categories.mock.json'
+//import categories from '../../data/categories.mock.json'
+import {collection, getDocs} from "firebase/firestore";
+import db from "../../firebaseConfig"
+
 
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [categories, setCategories] = useState([]);
   const open = Boolean(anchorEl);
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
@@ -15,6 +19,26 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const getCategories = async()=>{
+    const categoryCollection = collection (db, 'categories');
+    const categorySnapshot = await getDocs(categoryCollection);
+    const categoryList = categorySnapshot.docs.map ((doc)=>{
+      return {id:doc.id, ...doc.data()}
+    })
+    return categoryList
+
+  }
+
+  useEffect(()=>{
+    getCategories()
+      .then((res)=>{
+        setCategories(res)
+      });
+    
+  },[]);
+
+ 
 
   return (
     <AppBar position="static" >
@@ -48,10 +72,11 @@ const Navbar = () => {
                   'aria-labelledby': 'basic-button',
                 }}
                
+               
               >
                 {categories.map((category) => {
 
-                  return <Link to={`/category/${category.slug}`} key={category.id}><MenuItem  className="menu-item" onClick={handleClose} key={category.id}>{category.title}</MenuItem></Link>
+                  return <Link to={`/category/${category.key}`} key={category.id}><MenuItem  sx={{ color:'#839AA8' }} onClick={handleClose} key={category.id}>{category.title}</MenuItem></Link>
 
                 })}
                 

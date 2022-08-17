@@ -3,6 +3,7 @@ import React, { useContext }  from 'react'
 import { CartContext } from '../../context/CartContext';
 import {Link} from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete';
+import RegisterForm from '../Form/RegisterForm';
 
 const Cart = () => {
 
@@ -96,46 +97,8 @@ const Cart = () => {
         </Grid>
         
         <Grid item xs={12} md={4} >
-          <Typography variant='h5'>Registro de Usuario</Typography>
-          <Box
-            component="form"
-            noValidate
-            autoComplete="off"
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '35ch' },
-              mt:2
-            }}
-            textAlign="center"
-          >
-            <TextField
-              id="name"
-              label="Nombre"
-              size="small"
-
-            />
-            <TextField
-              id="surname"
-              label="Apellido"
-              size="small"
-            />
-            <TextField
-              id="phone"
-              label="Teléfono"
-              size="small"
-            />
-            <TextField
-              id="email"
-              label="Correo electronico"
-              size="small"
-            />
-            
-          </Box>
-          <Box textAlign='center'>
-            <Button variant="contained" size='small' sx={{ mt:5, mx:'auto' }} >
-                  Registrar
-            </Button>
-          </Box>
           
+          <RegisterForm/>
           
         </Grid>
 
