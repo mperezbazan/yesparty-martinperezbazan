@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import {Typography, CardMedia, Box, Button} from '@mui/material'
+import {Typography, CardMedia, Box, Button, Stack} from '@mui/material'
 import './ItemDetail.css'
 import ItemCount from '../ItemCount/ItemCount'
 import {Link} from 'react-router-dom'
@@ -56,11 +56,19 @@ const ItemDetail = ({item, loading}) => {
                 <Typography variant="body2" color="initial">Cantidad en stock: {stock}</Typography>
                 {qty>0 ? 
                   (
-                  <Link to="/cart">
-                    <Button variant='contained' size="small" color='info' sx ={{ mt:5, align:"center" }}>
-                      Terminar Compra
-                    </Button>
-                  </Link>
+                    <Stack direction="row" spacing={2} m={2}>
+                      <Link to='/'>
+                        <Button variant="contained" size='small' color='secondary' >
+                          Seguir comprando
+                        </Button>
+                      </Link>
+                      <Link to="/cart">
+                        <Button variant='contained' size="small" color='info' >
+                          Finalizar Compra
+                        </Button>
+                      </Link>
+                    </Stack>
+                  
                   )
                   :
                   (<ItemCount stock={stock} initial={1} onAdd={addProductToCart}/>)

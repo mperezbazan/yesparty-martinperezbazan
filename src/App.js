@@ -1,10 +1,12 @@
 import NavBar from './components/Navbar/Navbar'
 import './App.css';
-import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
-import Cart from './components/Cart/Cart'
 import CartProvider from './context/CartContext';
+import Home from './pages/Home'
+import Category from './pages/Category';
+import ItemDetail from './pages/ItemDetail';
+import CartPage from './pages/CartPage';
+import Footer from './pages/Footer';
 
 function App() {
   return (
@@ -14,13 +16,14 @@ function App() {
         <CartProvider>
           <NavBar/>
           <Routes>
-            <Route path="/" element={<ItemListContainer greeting="PRODUCTOS DESTACADOS"/>}/>
-            <Route path="/category/:category" element={<ItemListContainer/>}/>
-            <Route path="/item/:id" element={<ItemDetailContainer/>}/>
-            <Route path="/cart" element={<Cart/>}/>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/category/:category" element={<Category/>}/>
+            <Route path="/item/:id" element={<ItemDetail/>}/>
+            <Route path="/cart" element={<CartPage/>}/>
           </Routes>
         </CartProvider>
       </BrowserRouter>
+      <Footer/>
     </div>
   );
 }

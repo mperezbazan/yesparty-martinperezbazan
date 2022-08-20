@@ -1,3 +1,14 @@
 a{
     text-decoration: none;
 }
+.footer {
+    flex-shrink: 0;
+    text-align: center;
+    color: #839AA8;
+    padding: 10px;
+    font-weight:200;
+    font-size: small;
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+}

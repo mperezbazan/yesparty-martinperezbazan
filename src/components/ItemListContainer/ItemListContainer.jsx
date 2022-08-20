@@ -34,8 +34,9 @@ useEffect(()=>{
   getProducts()
   .then((res)=>{
     setListProducts(res)
+    setLoading(false)
   });
-  setLoading(false)
+  
 },[category])
 
 
@@ -46,19 +47,23 @@ useEffect(()=>{
                 {category ? category.toUpperCase() : greeting  }
             </Typography>
            
-              {loading && (
+              {loading ?
+              (
                 <Box sx={{ display: 'flex', alignItems:'center', justifyContent:'center', marginY:5 }}>
                   <CircularProgress />
                 </Box>
-              )}
-            <Box sx={{ display:"flex", flexDirection:"row" }}>
-              {
-                listProducts.length>0 ? <ItemList items={listProducts}/>
-                : <Typography variant='h5' sx={{ height:'100vh', color:'#839AA8', m:5  }}>No existen productos para la categoría seleccionada</Typography>
+              )
+              :
+              (
+                <Box sx={{ display:"flex", flexDirection:"row" }}>
+                  {
+                    listProducts.length>0 ? <ItemList items={listProducts}/>
+                    : <Typography variant='h5' sx={{ height:'100vh', color:'#839AA8', m:5  }}>No existen productos para la categoría seleccionada</Typography>
+                  }
+                  
+                </Box>
+              )
               }
-              
-            </Box>
-           
             
             
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import Item from '../Item/Item'
-import { Box, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import {Link} from 'react-router-dom'
 
 

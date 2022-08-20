@@ -1,0 +1,7 @@
+.item-card:hover{
+    -webkit-box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.6);
+    -moz-box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.6);
+    box-shadow: 9px 10px 26px -6px rgba(0,0,0,0.6);
+    background-color: #54BAB9;
+    color: white;
+}
