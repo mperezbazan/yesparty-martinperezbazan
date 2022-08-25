@@ -7,11 +7,12 @@ import './Item.css'
 const Item = ({item}) => {
    return (
     <div>
-        <Card sx={{ width:350, m:1 }} className='item-card'>
+        <Card sx={{ m:1, maxWidth:300 }} className='item-card'>
             <CardHeader
                 title={item.title}
+                titleTypographyProps={{variant:'h6' }}
             />
-            <CardMedia component="img" height='400' title={item.title} image={`/images/${item.pictureUrl}`} />
+            <CardMedia component="img" height='400'  title={item.title} image={`/images/${item.pictureUrl}`} />
             <CardContent>
                 <Typography align="center" variant="h6" >$ {item.price} </Typography>
             </CardContent>

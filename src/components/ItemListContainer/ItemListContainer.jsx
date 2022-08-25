@@ -5,6 +5,7 @@ import './ItemListContainer.css'
 import {useParams} from 'react-router-dom'
 import {collection, getDocs, query, where} from 'firebase/firestore'
 import db from '../../firebaseConfig'
+import { Container } from '@mui/system'
 
 
 const ItemListContainer = ({greeting}) => {
@@ -22,8 +23,8 @@ const getProducts = async ()=>{
   :
   collection(db, 'items')
  
-  const productSnapshot= await getDocs(productCollection)
-  const productList = productSnapshot.docs.map( (doc) => {
+const productSnapshot= await getDocs(productCollection)
+const productList = productSnapshot.docs.map( (doc) => {
     return {id:doc.id, ...doc.data()}
   })
   return productList;
@@ -42,30 +43,31 @@ useEffect(()=>{
 
   return (
     <div className='container'>
-        
-            <Typography variant="h5" className="list-title">
-                {category ? category.toUpperCase() : greeting  }
-            </Typography>
-           
-              {loading ?
-              (
-                <Box sx={{ display: 'flex', alignItems:'center', justifyContent:'center', marginY:5 }}>
-                  <CircularProgress />
-                </Box>
-              )
-              :
-              (
-                <Box sx={{ display:"flex", flexDirection:"row" }}>
-                  {
-                    listProducts.length>0 ? <ItemList items={listProducts}/>
-                    : <Typography variant='h5' sx={{ height:'100vh', color:'#839AA8', m:5  }}>No existen productos para la categoría seleccionada</Typography>
-                  }
-                  
-                </Box>
-              )
-              }
+      <Typography variant="h5" className="list-title">
+          {category ? category.toUpperCase() : greeting  }
+      </Typography>
+      <Container  maxWidth='xl'>
+        {loading ?
+        (
+          <Box sx={{ display: 'flex', alignItems:'center', justifyContent:'center', marginY:5 }}>
+            <CircularProgress />
+          </Box>
+        )
+        :
+        (
+          <Box sx={{ display:"flex", flexDirection:"row" }}>
+            {
+              listProducts.length>0 ? 
+              <ItemList items={listProducts}/>
+              : 
+              <Typography variant='h5' sx={{ color:'#839AA8', m:5  }}>No existen productos para la categoría seleccionada</Typography>
+            }
             
+          </Box>
+        )
+        }
             
+      </Container>    
 
     </div>
   )

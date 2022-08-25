@@ -11,18 +11,19 @@ import Footer from './pages/Footer';
 function App() {
   return (
     <div className="App">
-      
-      <BrowserRouter>
-        <CartProvider>
-          <NavBar/>
-          <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/category/:category" element={<Category/>}/>
-            <Route path="/item/:id" element={<ItemDetail/>}/>
-            <Route path="/cart" element={<CartPage/>}/>
-          </Routes>
-        </CartProvider>
-      </BrowserRouter>
+      <div className="Container">
+        <BrowserRouter>
+          <CartProvider>
+            <NavBar/>
+            <Routes>
+              <Route path="/" element={<Home/>}/>
+              <Route path="/category/:category" element={<Category/>}/>
+              <Route path="/item/:id" element={<ItemDetail/>}/>
+              <Route path="/cart" element={<CartPage/>}/>
+            </Routes>
+          </CartProvider>
+        </BrowserRouter>
+      </div>
       <Footer/>
     </div>
   );

@@ -1,13 +1,11 @@
 import React, {useState, useContext} from 'react'
-import { Typography, Box, TextField, Button, Divider,CircularProgress } from '@mui/material'
+import { Typography, Box, TextField, Button, Divider,CircularProgress, Grid } from '@mui/material'
 import { CartContext } from '../../context/CartContext'
 import {addDoc, collection, updateDoc, doc, increment} from 'firebase/firestore'
 import db from '../../firebaseConfig'
 import { Link } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/material.css'
-
-
 
 const OrderForm = () => {
   const {cart, totalInCart, clear }=useContext(CartContext);
@@ -56,13 +54,13 @@ const OrderForm = () => {
     }else{
       setFormData({...formData, [e.target.name]: e.target.value})
     }
-    
   }
 
   const handleSubmit=(e)=>{
     e.preventDefault();
     setLoading(true)
     sendOrder({...orderData, buyer: formData})
+    
   }
 
 
@@ -76,82 +74,106 @@ const OrderForm = () => {
     )
     :
     success ? (
-        <Box sx={{p:0,m:0,  height:350  }}>
-        <Typography variant='h6'>GRACIAS POR TU COMPRA!</Typography>
+      <Grid container>
+        <Grid item>
+          <Typography variant='h6'>GRACIAS POR TU COMPRA!</Typography>
+        </Grid>
         <Divider/>
-        <Typography variant='h6' sx={{ my:5 }}> N° de Orden:  <Typography color={'primary'} >{success}</Typography></Typography>
-        <Typography variant='body1'>Conserve este número de orden para poder recibir sus productos</Typography>
-        <Link to='/'>
-          <Button variant='contained' color='primary' sx={{mt:5 }}>
-            Volver a inicio
-          </Button>
-        </Link>
-        </Box>
+        <Grid item>
+          <Typography variant='h6' sx={{ my:5 }}> N° de Orden:  <Typography color={'primary'} >{success}</Typography></Typography>
+          <Typography variant='body1'>Conserve este número de orden para poder recibir sus productos</Typography>
+        </Grid>
+        <Grid item>
+          <Link to='/'>
+            <Button variant='contained' color='primary' sx={{mt:5 }}>
+              Volver a inicio
+            </Button>
+          </Link>
+        </Grid>
+      </Grid>
+        
       )
       :
       (
-        <Box sx={{p:0,m:0, height:350  }}>
-          <Typography variant='h5'>Datos de Contacto</Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            autoComplete="off"
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '35ch' },
-              mt:2
-            }}
-            textAlign="center"
-            
-          >
-            <TextField
-              id="name"
-              label="Nombre"
-              size="medium"
-              name='name'
-              type={'text'}
-              onChange={handleChange}
-              value={formData.name}
-              required
-
-            />
-            
-
-            <PhoneInput
-              country={'ar'}
-              specialLabel='Telefono'
-              onlyCountries={['ar']}
-              value={formData.phone}
-              onChange={handleChange}
-              
-              masks={{ ar:'(...) ...-....' }}
-              inputProps={{ 
-                name: 'phone',
-                required:true,
-                autoFocus:true
-                
-               }}
-            />
-            <TextField
-              id="email"
-              label="Correo electronico"
-              type={'email'}
-              size="medium"
-              name='email'
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            
-            <Button
-              color="success"
-              type="submit"
-              variant="contained"
-              sx={{ m:5 }}
+        <Grid container spacing={2} >
+          <Grid item xs={12}>
+            <Typography variant='h5'>Datos de Contacto</Typography>
+          </Grid>
+          
+          <Grid item xs={12}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              sx={{
+                '& .MuiTextField-root': { my: 3},
+                mt:2
+              }}
             >
-              Finalizar Compra
-            </Button>
-          </Box>
-        </Box>
+              <Grid container>
+                <Grid item xs={12} >
+                  <TextField
+                    id="name"
+                    label="Nombre"
+                    size="medium"
+                    name='name'
+                    type={'text'}
+                    onChange={handleChange}
+                    value={formData.name}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <PhoneInput
+                    country={'ar'}
+                    specialLabel='Telefono'
+                    onlyCountries={['ar']}
+                    value={formData.phone}
+                    onChange={handleChange}
+                    masks={{ ar:'(...) ...-....' }}
+                    inputProps={{ 
+                      name: 'phone',
+                      required:true,
+                      autoFocus:true
+                      
+                    }}
+                    
+
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="email"
+                    label="Correo electronico"
+                    type={'email'}
+                    size="medium"
+                    name='email'
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                    
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    color="success"
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                  >
+                    Finalizar Compra
+                  </Button>
+                </Grid>
+              </Grid>
+            
+            </Box>
+            
+          </Grid>
+          </Grid>
+        
+        
       )
     }
     </>

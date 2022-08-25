@@ -13,7 +13,7 @@ const ItemList = ({items}) => {
       {
          items.map( (item) => {
           return (
-            <Grid item  key={item.id}>
+            <Grid item key={item.id}>
               <Link to={`/item/${item.id}`}  >
                 <Item key={item.id} item={item}/>
               </Link>

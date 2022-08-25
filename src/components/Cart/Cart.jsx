@@ -20,76 +20,69 @@ const Cart = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
+    width:300,
     p: 2,
+    
   };
   
   return (
     <>
-      <Grid container spacing={2} direction='row' sx={{ m:2 }}>
+      <Grid container spacing={2} direction='row' sx={{ p:5 }}>
 
         <Grid item xs={12} md={6} >
         
-
-          <Typography variant='h5'>Tus productos</Typography>
+          <Typography variant='h5' sx={{ mb:3 }}>Tus productos</Typography>
           {
            cart.length>0 ?
             <>
               {cart.map( (product) => {
                 return(
                   <div key={product.id}>
-                    <Box sx={{display:'flex', alignItems:'center', my:1}} >
-                     <Grid  spacing={2} container alignItems='center' justifyContent='center'>
-                        <Grid item md={2} xs={1}>
+                     <Grid  spacing={2} container alignItems='center' justifyContent='center' >
+                        <Grid item md={2} xs={2}>
                           <CardMedia
-                            sx={{  height:100, m:1, maxWidth:60 }}
+                            sx={{  maxHeight:200, maxWidth:200 }}
                             component="img"
                             src={`../images/${product.pictureUrl}`}
                           />
                         </Grid>
-                        <Grid item md={1} xs={1} >
+                        <Grid item md={1} xs={2} >
                           <Typography variant="p"sx={{ mr:1,minWidth:40, alignItems:'center'}}>{product.quantity} X </Typography>
                         </Grid>
                         
-                        <Grid item md={3} xs={5}>
+                        <Grid item md={3} xs={4}>
                           <Typography variant="p" sx={{ mr:1, minWidth:150 }}>{product.title}</Typography>
                         </Grid>
-                        <Grid item md={2} xs={1} >
+                        <Grid item md={2} xs={4} >
                           <Typography variant="p"sx={{ mr:1,minWidth:40, alignItems:'center'}}>$ {product.price} </Typography>
                         </Grid>
-                        <Grid item md={3} xs={2}>
+                        <Grid item md={3} xs={4}>
                         <Typography variant="p" sx={{ mr:1, minWidth:100 }}>Subtotal: $ {product.quantity * product.price}</Typography>
                         </Grid>
                         
-                        <Grid item md={1} xs={1}>
+                        <Grid item md={1} xs={2}>
                           <Button onClick={()=>removeFromCart(product.id)}>
                             <DeleteIcon />
                           </Button>
                         </Grid>
 
                      </Grid>
-                      
-                    
-                    
-                    
-                    
-                </Box>
                 <Divider/>
                 </div>
     
                )
                 })  
               }
-              <Stack direction="row-reverse" spacing={2} m={2}>
+              <Stack direction="row-reverse" spacing={2} mr={5} mt={1}>
                 <Link to='/'>
                   <Button variant="text" size='small' >
                     Seguir comprando
                   </Button>
                 </Link>
-                <Button variant="text" size='small' color='error' sx={{ mx:5 }} onClick={clear}>
+                <Button variant="text" size='small' color='error' onClick={clear}>
                       Vaciar carrito
                   </Button>
               </Stack>
@@ -115,12 +108,12 @@ const Cart = () => {
             </Grid>
             
             <Grid item xs={12} md={4} >
-            <Typography sx={{ my:2 }} variant="h5">Datos de Compra</Typography>
-            <Typography sx={{ mt:5 }} variant="h6">Envio: GRATIS</Typography>
-            <Typography sx={{ my:2 }} variant="h6">Total de compra: $ {totalInCart}</Typography>
-            <Button variant="contained" size='small' color='success'sx={{ mt:5 }} onClick={()=>setOpen(true)}>
-                Realizar pago
-            </Button>
+              <Typography sx={{ my:2 }} variant="h5">Datos de Compra</Typography>
+              <Typography sx={{ mt:5 }} variant="h6">Envio: GRATIS</Typography>
+              <Typography sx={{ my:2 }} variant="h6">Total de compra: $ {totalInCart}</Typography>
+              <Button variant="contained" size='small' color='success'sx={{ mt:5 }} onClick={()=>setOpen(true)}>
+                  Realizar pago
+              </Button>
               
             </Grid>
           </>

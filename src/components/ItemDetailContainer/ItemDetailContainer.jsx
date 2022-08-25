@@ -12,13 +12,10 @@ const ItemDetailContainer = () => {
 
   const getProduct = async ()=>{
     const docRef = doc(db, 'items',id);
-   
     const docSnapshot= await getDoc(docRef)
     const product = {id: docSnapshot.id, ...docSnapshot.data()}
     return product;
   }
-
-  
 
   useEffect(()=>{
       setLoading(true)
@@ -32,11 +29,11 @@ const ItemDetailContainer = () => {
     
   return (
     <>
-    {loading ?
-    <SkeletonItem/>
-    :
-    <ItemDetail item={item} loading={loading}/>
-    }
+      {loading ?
+        <SkeletonItem/>
+      :
+        <ItemDetail item={item} loading={loading}/>
+      }
     </>
   )
   

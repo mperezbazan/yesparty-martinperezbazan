@@ -7,8 +7,7 @@ const CartProvider = ({children}) => {
     const [totalInCart, setTotalInCart]=useState(0);
     const [totalItems, setTotalItems]=useState(0);
     const addToCart =(product)=>{
-        //console.log(product)
-
+        
         const productIndex = cart.findIndex( (productInCart)=>productInCart.id === product.id);
 
         if(productIndex=== -1){
