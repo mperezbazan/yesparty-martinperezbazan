@@ -31,6 +31,7 @@ const productList = productSnapshot.docs.map( (doc) => {
     return {id:doc.id, ...doc.data()}
   })
 
+  //La busqueda de productos se realiza con filter, dado que en Firebase no hay una forma de obtener una coleccion con un operador LIKE, como en otras BBDD.
   productSearched ?
     (
       filteredProduct= productList.filter(

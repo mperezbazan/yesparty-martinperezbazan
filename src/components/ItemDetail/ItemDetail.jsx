@@ -40,7 +40,7 @@ const ItemDetail = ({item, loading}) => {
                 
               }}>
                 <CardMedia
-                 
+                 sx={{ maxHeight:600 }}
                   component="img"
                   image={`../images/${pictureUrl}`}
                 />
