@@ -1,24 +1,27 @@
-import { Typography, Box, CircularProgress } from '@mui/material'
+import { Typography, Box, CircularProgress, Stack } from '@mui/material'
 import React, {useEffect, useState} from 'react'
 import ItemList from '../ItemList/ItemList.jsx'
 import './ItemListContainer.css'
-import {useParams} from 'react-router-dom'
+import {useParams, useSearchParams} from 'react-router-dom'
 import {collection, getDocs, query, where} from 'firebase/firestore'
 import db from '../../firebaseConfig'
 import { Container } from '@mui/system'
-
+import Search from '../Search/Search.jsx'
 
 const ItemListContainer = ({greeting}) => {
 
-
+const [searchParams]=useSearchParams();
 const [listProducts,setListProducts]=useState([])
 const [loading, setLoading] = useState(false);
 const {category} =useParams()
 
 const getProducts = async ()=>{
+  const productSearched = searchParams.get('search');
+  let filteredProduct
   const productCollection = category ? query(
     collection(db, 'items'),
-    where("category","==",category)
+    where("category","==",category),
+   
   ) 
   :
   collection(db, 'items')
@@ -27,7 +30,22 @@ const productSnapshot= await getDocs(productCollection)
 const productList = productSnapshot.docs.map( (doc) => {
     return {id:doc.id, ...doc.data()}
   })
-  return productList;
+
+  productSearched ?
+    (
+      filteredProduct= productList.filter(
+      (product)=>{
+      return product.description.toLowerCase().indexOf(productSearched.toLowerCase()) !== -1
+    })
+      
+    )
+  :
+  (
+    filteredProduct=productList
+  )
+  
+  return filteredProduct;
+
 }
 
 useEffect(()=>{
@@ -38,15 +56,19 @@ useEffect(()=>{
     setLoading(false)
   });
   
-},[category])
+},[category, searchParams])
 
 
   return (
+    
     <div className='container'>
-      <Typography variant="h5" className="list-title">
-          {category ? category.toUpperCase() : greeting  }
-      </Typography>
-      <Container  maxWidth='xl'>
+      <Stack className="list-title" spacing={2} direction={'row'}>
+        <Typography variant="h5" sx={{ display:'flex' }} >
+            {category ? category.toUpperCase() : greeting  }
+        </Typography>
+        <Search/>
+      </Stack>
+      <Container  maxWidth='xl' >
         {loading ?
         (
           <Box sx={{ display: 'flex', alignItems:'center', justifyContent:'center', marginY:5 }}>
@@ -55,7 +77,7 @@ useEffect(()=>{
         )
         :
         (
-          <Box sx={{ display:"flex", flexDirection:"row" }}>
+          <Box sx={{ display:"flex", flexDirection:"row",  }}>
             {
               listProducts.length>0 ? 
               <ItemList items={listProducts}/>

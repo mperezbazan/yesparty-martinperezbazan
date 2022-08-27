@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import {collection, getDocs} from "firebase/firestore";
 import db from "../../firebaseConfig"
 
+
+
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -26,7 +28,7 @@ const Navbar = () => {
     setAnchorEl(null);
     setAnchorElNav(null);
   };
-
+  
   const getCategories = async()=>{
     const categoryCollection = collection (db, 'categories');
     const categorySnapshot = await getDocs(categoryCollection);
@@ -135,8 +137,9 @@ const Navbar = () => {
               <Button sx={{ my: 2, color: 'white', display:{xs:'none', md:'flex'}}}>
                 Contacto
               </Button>
+              
             </Box>
-            
+                       
             <CartWidget/>
 
           </Box>

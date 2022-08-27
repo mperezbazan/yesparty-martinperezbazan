@@ -1,0 +1,10 @@
+.search-container{
+    background-color:  rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    display: flex;
+
+}
+.search-container:hover{
+    background-color:  rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}

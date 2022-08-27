@@ -7,8 +7,7 @@ import {Link} from 'react-router-dom'
 const ItemList = ({items}) => {
   return (
     
-    
-    <Grid container spacing={1} direction='row' sx={{ m:1 }}>
+    <Grid container spacing={1} direction='row' sx={{ m:1, justifyContent:'center'}}>
        
       {
          items.map( (item) => {

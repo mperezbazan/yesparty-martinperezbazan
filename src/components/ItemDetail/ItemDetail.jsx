@@ -36,11 +36,11 @@ const ItemDetail = ({item, loading}) => {
                 boxShadow:1,
                 borderRadius:2,
                 p:2,
-                maxWidth:300,
+            
                 
               }}>
                 <CardMedia
-                  sx={{  width:300 }}
+                 
                   component="img"
                   image={`../images/${pictureUrl}`}
                 />
