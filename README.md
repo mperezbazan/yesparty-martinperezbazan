@@ -6,7 +6,7 @@ Esta tienda permite al cliente mostrar sus productos y realizar las órdenes de 
 Se utiliza una SPA, creada con ReactJS, en cuanto a al backend está realizada en Firebase, donde se encuentra alojada la base de datos de Productos.
 
 ## Funcionalidad del proyecto
-![image](https://github.com/mperezbazan/yesparty-martinperezbazan/blob/master/public/images/YESParty-mperezbazan.gif)
+![image](https://github.com/mperezbazan/yesparty-martinperezbazan/blob/master/YESParty-mperezbazan.gif)
 Los productos están divididos por categorías, al seleccionar la categoría se mostrarán solamente los productos cargados con dicha categoría.
 Se encuentra disponible un buscador, que permite realizar la búsqueda de productos (Se realiza un filtrado de productos en los productos mostrados).
 Al hacer click en cualquier producto se envía a un detalle del item, que permite seleccionar la cantidad que se desea comprar, y contiene un botón para poder adicionarlo al carrito de compras.
